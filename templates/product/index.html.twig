@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+<h1>Liste des produits</h1>
+<a href="{{ path('product_aleatoire') }}">Voir un produit choisi au hasard</a>
+<a href="{{ path('creer_product') }}">Ajouter/créer un produit</a>
+
+<table>
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Slug</td>
+            <td>Description</td>
+            <td>Prix</td>
+        </tr>
+    </thead>
+    {% for product in products %}
+    <tr>
+        <td><a href="{{ path('voir_product',{'slug': product.slug }) }}">{{ product.nom }}</a></td>
+        <td>{{ product.slug }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.prix }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

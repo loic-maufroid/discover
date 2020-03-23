@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir un produit - {{ product.nom }}{% endblock %}
+
+{% block body %}
+<h1>Voir un produit - {{ product.nom }}</h1>
+<a href="{{ path('liste_product') }}">Retour à la liste de produits</a>
+
+<ul>
+    <li>Nom : {{ product.nom }}</li>
+    <li>Slug : {{ product.slug }}</li>
+    <li>Description : {{ product.description }}</li>
+    <li>Prix : {{ product.prix }}</li>
+</ul>
+
+{% endblock %}
