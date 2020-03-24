@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\ProductType;
+use App\Model\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -46,10 +47,28 @@ class ProductController extends AbstractController
      /**
      * @Route("/product/create", name="creer_product")
      */
-    public function creer()
+    public function creer(Request $request)
     {
 
+        $product = new Product();
+
+        $form = $this->createForm(ProductType::class,$product);
+            
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // $form->getData() renvoie les données soumises
+                dump($product);
+                dump($form->getData() === $product);
+                // Exécute la logique de notre application, BDD, ...
+    
+                // return $this->redirectToRoute('product_list');
+            }
+
+
         return $this->render('product/create.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 

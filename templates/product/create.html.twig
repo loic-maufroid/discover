@@ -4,8 +4,15 @@
 
 {% block body %}
 <h1>Créer un produit</h1>
+
+<div class="container my-4">
 <a href="{{ path('liste_product') }}">Retour à la liste de produits</a>
 
-<p>@todo : créer le formulaire de création de produit</p>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+<button>Ajouter le produit</button>
+{{ form_end(form) }}
+</div>
 
 {% endblock %}
