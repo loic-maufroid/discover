@@ -1,28 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des produits{% endblock %}
-
-{% block body %}
-<h1>Liste des produits</h1>
-<a href="{{ path('product_aleatoire') }}">Voir un produit choisi au hasard</a>
-<a href="{{ path('creer_product') }}">Ajouter/créer un produit</a>
-
-<table>
-    <thead>
-        <tr>
-            <td>Nom</td>
-            <td>Slug</td>
-            <td>Description</td>
-            <td>Prix</td>
-        </tr>
-    </thead>
-    {% for product in products %}
-    <tr>
-        <td><a href="{{ path('voir_product',{'slug': product.slug }) }}">{{ product.nom }}</a></td>
-        <td>{{ product.slug }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.prix }}</td>
-    </tr>
-    {% endfor %}
-</table>
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1 class="text-center mb-5">Nos produits</h1>
+    <div>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ product.nom }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.prix }} €</td>
+            <td><a href="{{ path('voir_product',{'slug': product.slug}) }}" class="btn btn-secondary">Voir le produit</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% for message in app.flashes('commande') %}
+  {{ message }}
+  {% endfor %}
 {% endblock %}

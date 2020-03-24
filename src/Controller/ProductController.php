@@ -65,6 +65,16 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/product/order/{slug}", name="commande_product")
+     */
+    public function order($slug){
+
+        $this->addFlash('commande','Nous avons bien pris en compte votre commande '.$slug);
+    
+        return $this->redirectToRoute('liste_product');
+    }
+
+    /**
      * @Route("/product/{slug}", name="voir_product")
      */
     public function voir($slug)
